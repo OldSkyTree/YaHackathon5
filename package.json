@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "test": "echo \"Test successfully completed\" && exit 0"
+    "test": "echo \"Test successfully completed\" && exit 0",
+	"lint": "eslint ."
   },
   "dependencies": {
     "vue": "^2.5.11",
@@ -20,6 +21,7 @@
     "not ie <= 8"
   ],
   "devDependencies": {
+    "eslint": "^5.16.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
