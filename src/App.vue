@@ -1,12 +1,22 @@
 <template>
   <div id="app">
+    <headerMain/>
     <router-view></router-view>
+    <footerMain/>
   </div>
 </template>
 
 <script>
+
+import headerMain from './components/header-main';
+import footerMain from './components/footer-main';
+
 export default {
   name: 'app',
+  components: {
+    headerMain,
+    footerMain
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

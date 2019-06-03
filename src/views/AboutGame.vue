@@ -1,5 +1,5 @@
 <template>
     <section>
-        top
+        <h1>Об игре</h1>
     </section>
 </template>
