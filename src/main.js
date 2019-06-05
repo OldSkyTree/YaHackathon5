@@ -2,8 +2,10 @@ import Vue from 'vue';
 import App from './App.vue';
 
 import VueRouter from 'vue-router';
+import Validate from './validate.js';
 
 Vue.use(VueRouter);
+Vue.use(Validate);
 
 import Index from './views/Index';
 import AboutGame from './views/AboutGame';
@@ -24,3 +26,8 @@ new Vue({
 	router,
 	render: h => h(App)
 });
+
+
+
+
+
