@@ -1,5 +1,5 @@
 <template>
-    <form action="">
+    <form method="post" action="http://localhost:3000/register" >
         <h2>Авторизация</h2>
         <label>
             <span>Логин</span>
