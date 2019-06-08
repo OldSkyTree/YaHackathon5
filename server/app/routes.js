@@ -45,7 +45,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/chat', function (req, res) {
-		let { token, timestamp } = req.body;
+		let { token, timestamp } = req.query;
 
 		returnOriginData(chat.getMessages(token, timestamp), res);
 	});
