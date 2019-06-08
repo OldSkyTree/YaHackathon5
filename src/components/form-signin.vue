@@ -75,8 +75,8 @@ export default {
 				})
 					.then(res => res.json())
 					.then(res => {
-						if(res.status !== 'error') {
-							localStorage.setItem('user', JSON.stringify(res));
+						if(res.status === 'ok') {
+							localStorage.setItem('user', JSON.stringify(res.user));
                         
 							this.$router.push({ path: '/profile' });
 						}
