@@ -2,8 +2,7 @@
   <section>
     {{ user }}
     
-    <users-online/>
-
+    <users-online />
   </section>
 </template>
 
@@ -11,9 +10,9 @@
 import usersOnline from '../components/users-online.vue';
 
 export default {
-    components: {
-        usersOnline
-    },
+	components: {
+		usersOnline
+	},
 	data() {
 		return {
 			user: JSON.parse(localStorage.getItem('user'))
