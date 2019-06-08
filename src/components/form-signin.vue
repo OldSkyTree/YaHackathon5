@@ -65,9 +65,8 @@ export default {
 			const validation = this.$validate(this.user);
 
 			if(validation.isValid) {
-				/* eslint-disable no-console */
+				// eslint-disable-next-line no-console
 				console.log('Форма заполнена без ошибок');
-				/* eslint-enable no-console */
 			}
 			else {
 				this.errors = validation.errors;

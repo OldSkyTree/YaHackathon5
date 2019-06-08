@@ -9,13 +9,13 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "echo \"Test successfully completed\" && exit 0",
-    "lint": "eslint .",
-    "lint-fix": "eslint . --fix",
+    "lint": "eslint . --ext .js,.vue",
+    "lint-fix": "eslint . --fix --ext .js,.vue",
     "server": "node server/server.js"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "eslint . --ext .js,.vue"
     }
   },
   "lint-staged": {
