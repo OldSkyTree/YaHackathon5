@@ -45,7 +45,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/chat', function (req, res) {
-		let { token, timestamp } = req.body;
+		let { token, timestamp } = req.query;
 
 		returnOriginData(chat.getMessages(token, timestamp), res);
 	});
@@ -69,7 +69,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/status', function (req, res) {
-		let { token, combat_id } = req.body;
+		let { token, combat_id } = req.query;
 
 		returnOriginData(combat.getCombatInfo(token, combat_id), res);
 	});
