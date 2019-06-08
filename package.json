@@ -9,7 +9,9 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "echo \"Test successfully completed\" && exit 0",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
+    "server": "node server/server.js"
   },
   "husky": {
     "hooks": {
@@ -23,6 +25,11 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.19.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "request": "^2.88.0",
     "vue": "^2.5.11",
     "vue-router": "^3.0.6"
   },
