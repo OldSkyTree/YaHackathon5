@@ -47,6 +47,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/whoami', function(req, res) {
+		
 		let token = req.query.token;
 
 		axios.get(`${BASE_URL}/whoami`, {
