@@ -10,7 +10,9 @@
         v-model.trim="user.login.value"
         type="text"
       >
-      {{ $validateErrorsMsgFrom(errors.login) }}
+      <span class="errors">
+        {{ $validateErrorsMsgFrom(errors.login) }}
+      </span>
     </label>
     <label>
       <span>Пароль</span>
@@ -18,15 +20,19 @@
         v-model.trim="user.password.value"
         type="password"
       >
-      {{ $validateErrorsMsgFrom(errors.password) }}
+      <span class="errors">
+        {{ $validateErrorsMsgFrom(errors.password) }}
+      </span>
     </label>
-    <button
-      type="button"
-      @click="signIn"
-    >
-      Войти
-    </button>
-    <div>
+    <div class="button-holder">
+      <button
+        type="button"
+        @click="signIn"
+      >
+        Войти
+      </button>
+    </div>
+    <div class="addition-actions">
       Если у вас еще нет аккаунта — пройдите простую <button
         type="button"
         @click="$emit('switch-form', 'signup')"

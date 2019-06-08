@@ -26,13 +26,29 @@ export default {
 </script>
 
 <style>
+@import url('//fonts.googleapis.com/css?family=Roboto:400,500&display=swap&subset=cyrillic');
+body {
+  background: #010205 url('assets/body-login-bg.jpg') no-repeat center top/cover;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 60px 15px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+h1 {
+  font-size: 32px;
 }
 
 h1, h2 {
@@ -50,6 +66,6 @@ li {
 }
 
 a {
-  color: #42b983;
+  color: #fff;
 }
 </style>

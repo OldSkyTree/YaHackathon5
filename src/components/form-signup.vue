@@ -7,7 +7,9 @@
         v-model.trim="user.login.value"
         type="text"
       >
-      {{ $validateErrorsMsgFrom(errors.login) }}
+      <span class="errors">
+        {{ $validateErrorsMsgFrom(errors.login) }}
+      </span>
     </label>
     <label>
       <span>Пароль</span>
@@ -15,23 +17,29 @@
         v-model.trim="user.password.value"
         type="password"
       >
-      {{ $validateErrorsMsgFrom(errors.password) }}
+      <span class="errors">
+        {{ $validateErrorsMsgFrom(errors.password) }}
+      </span>
     </label>
-    <button
-      type="button"
-      @click="signUp"
-    >
-      Создать аккаунт
-    </button>
-    <label>
+    <div class="button-holder">
+      <button
+        type="button"
+        @click="signUp"
+      >
+        Создать аккаунт
+      </button>
+    </div>
+    <label class="agreement">
       <input
         v-model="user.codex.value"
         type="checkbox"
       >
       <span>Нажимая на кнопку Войти, вы соглашаетесь с межгалактическим кодексом №756/4</span>
-      {{ $validateErrorsMsgFrom(errors.codex) }}
+      <span class="errors">
+        {{ $validateErrorsMsgFrom(errors.codex) }}
+      </span>
     </label>
-    <div>
+    <div class="addition-actions">
       У вас уже есть аккаунт? <button
         type="button"
         @click="switchForm"
