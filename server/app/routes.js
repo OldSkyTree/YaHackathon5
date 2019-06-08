@@ -56,6 +56,48 @@ module.exports = function(app) {
 		returnOriginData(chat.sendMessage(token, message, timestamp), res);
 	});
 
+	app.get('/super-chat', function (req, res) {
+		let { token, timestamp, username } = req.query;
+
+		const userRegExp = /^(@\w+)\s/;
+
+		chat.getMessages(token, timestamp).then(function (response) {
+			let data = response.data;
+
+			let generalChat = [];
+			let privateChats = {};
+
+			if (data && data.status === 'ok') {
+				data.chat.forEach(element => {
+					const receiver = userRegExp.exec(element.message);
+					if (receiver) {
+						const receiverName = receiver[1].substring(1);
+						element.message = element.message.replace(receiver[0], '');
+						//element.receiver = receiverName;
+
+						if (receiverName === username) {
+							pushMessageToDialog(privateChats, element.user.username, element);
+						}
+						else if (element.user.username === username) {
+							pushMessageToDialog(privateChats, receiverName, element);
+						}
+					}
+					else {
+						generalChat.push(element);
+					}
+				});
+			}
+			res.send({
+				status: 'ok',
+				generalChat, 
+				privateChats 
+			});
+		}).catch(function (response) {
+			const data = response.response.data;
+			res.status(response.response.status).send(data);
+		});
+	});
+
 	app.post('/fight', function (req, res) {
 		let { token } = req.body;
 
@@ -75,7 +117,7 @@ module.exports = function(app) {
 	});
 };
 
-const returnOriginData = (axiosPromise, res) => {
+const returnOriginData = function (axiosPromise, res) {
 	axiosPromise.then(function (response) {
 		let data = response.data;
 		res.send(data);
@@ -83,4 +125,11 @@ const returnOriginData = (axiosPromise, res) => {
 		const data = response.response.data;
 		res.status(response.response.status).send(data);
 	});
+};
+
+const pushMessageToDialog = function(chat, dialog, message) {
+	if (!chat[dialog]) {
+		chat[dialog] = [];
+	}
+	chat[dialog].push(message);
 };
