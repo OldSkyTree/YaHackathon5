@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <headerMain/>
-    <router-view></router-view>
-    <footerMain/>
+    <headerMain />
+    <router-view />
+    <footerMain />
   </div>
 </template>
 
@@ -12,17 +12,17 @@ import headerMain from './components/header-main';
 import footerMain from './components/footer-main';
 
 export default {
-  name: 'app',
-  components: {
-    headerMain,
-    footerMain
-  },
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
+	name: 'App',
+	components: {
+		headerMain,
+		footerMain
+	},
+	data () {
+		return {
+			msg: 'Welcome to Your Vue.js App'
+		};
+	}
+};
 </script>
 
 <style>
