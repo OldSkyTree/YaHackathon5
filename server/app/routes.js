@@ -10,7 +10,6 @@ module.exports = function(app) {
 		users.registerUser(username, password)
 			.then(function (response) {
 				let user = response.data.user;
-				res.cookie('token', user.token);
 				res.send(user);
 			})
 			.catch(function (response) {
@@ -25,7 +24,6 @@ module.exports = function(app) {
 		users.loginUser(username, password)
 			.then(function (response) {
 				let user = response.data.user;
-				res.cookie('token', user.token);
 				res.send(user);
 			})
 			.catch(function (response) {
@@ -35,11 +33,32 @@ module.exports = function(app) {
 	});
     
 	app.get('/ping', function (req, res) {
-        
 		axios.get(`${BASE_URL}/ping`)
 			.then(function (response) {
 				res.send(response.data);
 			});
-        
+	});
+
+	app.get('/online', function(req, res) {
+		axios.get(`${BASE_URL}/online`)
+			.then(function (response) {
+				res.send(response.data);
+			});
+	});
+
+	app.get('/whoami', function(req, res) {
+		let token = req.query.token;
+
+		axios.get(`${BASE_URL}/whoami`, {
+			params: { token }
+		})
+			.then(function (response) {
+				let user = response.data.user;
+				res.send(user);
+			})
+			.catch(function (response) {
+				const data = response.response.data;
+				res.status(response.response.status).send(data);
+			});
 	});
 };
