@@ -31,7 +31,7 @@ export default {
 		};
 	},
 	created() {
-        const timestamp = Date.now();
+		const timestamp = Date.now();
 
 		setInterval(() => {
 			const user = localStorage.getItem('user');
@@ -61,7 +61,7 @@ export default {
 			const user = localStorage.getItem('user');
 			if(!user) return;
 
-            const userToken = JSON.parse(user).token;
+			const userToken = JSON.parse(user).token;
 
 			fetch('http://localhost:3000/chat', {
 				method: 'POST',
@@ -73,9 +73,9 @@ export default {
 			})
 				.then(res => res.json())
 				.then(res => {
-                    if(res.status === 'ok') {
-                        this.newMessage = '';
-                    }
+					if(res.status === 'ok') {
+						this.newMessage = '';
+					}
 				})
 				.catch(err => {
 					// eslint-disable-next-line no-console
