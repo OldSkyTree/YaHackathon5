@@ -26,30 +26,67 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import url('//fonts.googleapis.com/css?family=Roboto:400,500&display=swap&subset=cyrillic');
 
-h1, h2 {
-  font-weight: normal;
-}
+  body {
+    font: 14px 'Roboto', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+  }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+  #app {
+    background: #010205 url('assets/body-login-bg.jpg') no-repeat center top/cover;
+    padding: 0 0 38px;
+    margin: 0;
+    min-height: 100vh;
+    position: relative;
+    box-sizing: border-box;
+  }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+  .container {
+    width: 100%;
+    max-width: 1160px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+  }
 
-a {
-  color: #42b983;
-}
+  h1, h2 {
+    font-weight: normal;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  /*********************************** Responsive styles */
+
+  @media screen and (max-width: 767px) {
+    #app {
+      height: 100%;
+    }
+  }
 </style>

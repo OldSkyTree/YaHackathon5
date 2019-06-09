@@ -2,33 +2,46 @@
   <form
     method="post"
     action="http://localhost:3000/register"
+    class="entry-form"
   >
-    <h2>Авторизация</h2>
-    <label>
-      <span>Логин</span>
+    <h2 class="entry-form__title">
+      Авторизация
+    </h2>
+    <label class="input">
+      <span class="input__label">Логин</span>
       <input
         v-model.trim="user.login.value"
         type="text"
+        class="input__element"
       >
-      {{ $validateErrorsMsgFrom(errors.login) }}
+      <span class="entry-form__errors">
+        {{ $validateErrorsMsgFrom(errors.login) }}
+      </span>
     </label>
-    <label>
-      <span>Пароль</span>
+    <label class="input">
+      <span class="input__label">Пароль</span>
       <input
         v-model.trim="user.password.value"
         type="password"
+        class="input__element"
       >
-      {{ $validateErrorsMsgFrom(errors.password) }}
+      <span class="entry-form__errors">
+        {{ $validateErrorsMsgFrom(errors.password) }}
+      </span>
     </label>
-    <button
-      type="button"
-      @click="signIn"
-    >
-      Войти
-    </button>
-    <div>
-      Если у вас еще нет аккаунта — пройдите простую <button
+    <div class="buttons-holder">
+      <button
         type="button"
+        @click="signIn"
+      >
+        Войти
+      </button>
+    </div>
+    <div class="entry-form__options">
+      Если у вас еще нет аккаунта — пройдите простую 
+      <button
+        type="button"
+        class="entry-form__options-btn"
         @click="$emit('switch-form', 'signup')"
       >
         регистрацию
