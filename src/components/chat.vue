@@ -1,7 +1,7 @@
 <template>
   <section>
-    <div>
-      <div
+    <ul class="chat">
+      <li
         v-for="(message, index) in messages"
         :key="index"    
       >
@@ -9,8 +9,8 @@
         {{ new Date(message.timestamp).toLocaleTimeString() }} ({{ new Date(message.timestamp).toLocaleDateString() }})
 
         {{ message.message }}
-      </div>
-    </div>
+      </li>
+    </ul>
     <form>
       <textarea v-model="newMessage" />
       <button
@@ -85,3 +85,10 @@ export default {
 	}
 };
 </script>
+<style>
+  .chat li {
+    width: 100%;
+    display: block;
+    margin: 0 0 10px;
+  }
+</style>
