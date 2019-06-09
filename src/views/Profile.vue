@@ -1,11 +1,16 @@
 <template>
   <section>
     {{ user.username }}
-		<button type="button" @click="fight">В бой</button>
+    <button
+      type="button"
+      @click="fight"
+    >
+      В бой
+    </button>
 
-		<div v-if="isPending">
-			{{ currentPendingMessage }}
-		</div>
+    <div v-if="isPending">
+      {{ currentPendingMessage }}
+    </div>
 
     <chat />
     <users-online />
