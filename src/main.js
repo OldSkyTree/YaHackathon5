@@ -12,6 +12,7 @@ import AboutGame from './views/AboutGame';
 import TopPlayers from './views/TopPlayers';
 import AboutDevelopers from './views/AboutDevelopers';
 import Profile from './views/Profile';
+import Battle from './views/Battle';
 
 const router = new VueRouter({
 	routes: [
@@ -22,6 +23,15 @@ const router = new VueRouter({
 		{
 			path: '/profile',
 			component: Profile,
+			meta: {
+				requiresAuth: true
+			}
+		},
+		{
+			path: '/battle',
+			name: 'battle',
+			component: Battle,
+			props: true,
 			meta: {
 				requiresAuth: true
 			}
