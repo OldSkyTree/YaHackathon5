@@ -26,46 +26,67 @@ export default {
 </script>
 
 <style>
-@import url('//fonts.googleapis.com/css?family=Roboto:400,500&display=swap&subset=cyrillic');
-body {
-  background: #010205 url('assets/body-login-bg.jpg') no-repeat center top/cover;
-}
-#app {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin: 60px 15px;
-}
+  @import url('//fonts.googleapis.com/css?family=Roboto:400,500&display=swap&subset=cyrillic');
 
-.container {
-  width: 100%;
-  max-width: 1140px;
-  margin: 0 auto;
-  display: flex;
-  flex-flow: row wrap;
-}
+  body {
+    font: 14px 'Roboto', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+  }
 
-h1 {
-  font-size: 32px;
-}
+  #app {
+    background: #010205 url('assets/body-login-bg.jpg') no-repeat center top/cover;
+    padding: 0 0 38px;
+    margin: 0;
+    min-height: 100vh;
+    position: relative;
+    box-sizing: border-box;
+  }
 
-h1, h2 {
-  font-weight: normal;
-}
+  .container {
+    width: 100%;
+    max-width: 1160px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+  }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+  h1, h2 {
+    font-weight: normal;
+  }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+  h1 {
+    font-size: 32px;
+  }
 
-a {
-  color: #fff;
-}
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  /*********************************** Responsive styles */
+
+  @media screen and (max-width: 767px) {
+    #app {
+      height: 100%;
+    }
+  }
 </style>

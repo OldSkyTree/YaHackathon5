@@ -1,27 +1,34 @@
 <template>
-  <form action="">
-    <h2>Регистрация</h2>
-    <label>
-      <span>Логин</span>
+  <form
+    action=""
+    class="entry-form"
+  >
+    <h2 class="entry-form__title">
+      Регистрация
+    </h2>
+    <label class="input">
+      <span class="input__label">Логин</span>
       <input
         v-model.trim="user.login.value"
         type="text"
+        class="input__element"
       >
-      <span class="errors">
+      <span class="entry-form__errors">
         {{ $validateErrorsMsgFrom(errors.login) }}
       </span>
     </label>
-    <label>
-      <span>Пароль</span>
+    <label class="input">
+      <span class="input__label">Пароль</span>
       <input
         v-model.trim="user.password.value"
         type="password"
+        class="input__element"
       >
-      <span class="errors">
+      <span class="entry-form__errors">
         {{ $validateErrorsMsgFrom(errors.password) }}
       </span>
     </label>
-    <div class="button-holder">
+    <div class="buttons-holder">
       <button
         type="button"
         @click="signUp"
@@ -33,15 +40,18 @@
       <input
         v-model="user.codex.value"
         type="checkbox"
+        class="agreement__input"
       >
-      <span>Нажимая на кнопку Войти, вы соглашаетесь с межгалактическим кодексом №756/4</span>
-      <span class="errors">
+      <span class="agreement__label">Нажимая на кнопку Войти, вы соглашаетесь с межгалактическим кодексом №756/4</span>
+      <span class="entry-form__errors">
         {{ $validateErrorsMsgFrom(errors.codex) }}
       </span>
     </label>
-    <div class="addition-actions">
-      У вас уже есть аккаунт? <button
+    <div class="entry-form__options">
+      У вас уже есть аккаунт? 
+      <button
         type="button"
+        class="entry-form__options-btn"
         @click="switchForm"
       >
         войдите в систему

@@ -1,13 +1,15 @@
 <template>
-  <section class="login-info">
+  <section class="entry-section">
     <div class="container">
       <div class="about-us">
-        <h1>Cosmos Battle</h1>
+        <h1 class="about-us__title">
+          Cosmos Battle
+        </h1>
         <p>
           Some great and funny text.
         </p>
       </div>
-      <div class="form-holder">
+      <div class="entry-form__container">
         <formSignin
           v-if="formShow === 'signin'"
           @switch-form="switchForm"
@@ -44,24 +46,28 @@ export default {
 };
 </script>
 <style>
-  .login-info {
-    padding: 50px 0;
+  .entry-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 30px;
+    display: flex;
+    align-items: flex-start;
   }
-  .about-us, .form-holder {
+  .about-us {
     width: 50%;
     box-sizing: border-box;
     padding: 20px 30px;
-    text-align: left;
   }
 
-  .about-us h1 {
+  .about-us__title {
     color: #fff;
     position: relative;
     padding: 0 0 20px;
     margin: 0 0 20px; 
+    font-size: 44px;
   }
 
-  .about-us h1::after {
+  .about-us__title::after {
     content: '';
     display: block;
     width: 100px;
@@ -72,51 +78,59 @@ export default {
     bottom: 0;
   }
 
-  .about-us p {
-    color: #fff;
+  .entry-form__container {
+    background: rgba(10, 25, 32, 0.8);
+    width: 50%;
+    box-sizing: border-box;
+    padding: 25px 30px;
   }
 
-  .form-holder {
-    background: rgba(10, 25, 32, 0.8);
-  }
-  .form-holder h2 {
-    color: #fff;
-    text-align: center;
-  }
-  form {
+  .entry-form {
     width: 100%;
     margin: 0;
   }
-  form label {
+
+  .entry-form__title {
+    color: #fff;
+    text-align: center;
+    margin: 0 0 15px;
+  }
+
+  .input {
     width: 100%;
     display: block;
     color: #fff;
+    margin: 0 0 10px;
   }
-  form label > span {
+
+  .input__label {
     width: 100%;
     display: block;
     margin: 0 0 5px;
     color: #fff;
   }
-  form input[type="text"],
-  form input[type="password"] {
+
+  .input__element {
     height: 40px;
     width: 100%;
-    margin: 0 0 20px;
+    margin: 0 0 5px;
     padding: 0 10px;
     box-sizing: border-box;
     background: #fff;
     color: #000;
     font-size: 16px;
     font-weight: 500;
+    border: none;
   }
-  form .button-holder {
+
+  .buttons-holder {
     width: 100%;
     display: flex;
     justify-content: center;
     margin: 0 0 20px;
   }
-  form .button-holder button {
+
+  .buttons-holder button {
     height: 40px;
     display: inline-block;
     margin: 0 auto;
@@ -128,13 +142,15 @@ export default {
     font-size: 20px;
     cursor: pointer; 
   }
-  .addition-actions {
+
+  .entry-form__options {
     width: 100%;
     color: #fff;
     font-size: 14px;
     text-align: center;
   }
-  .addition-actions button {
+
+  .entry-form__options-btn {
     background: transparent;
     border: none;
     color: #fff;
@@ -144,10 +160,12 @@ export default {
     padding: 0;
     margin: 0;
   }
-  .addition-actions button:hover {
+
+  .entry-form__options-btn:hover {
     text-decoration: none;
     cursor: pointer;
   }
+
   .agreement {
     width: 100%;
     display: flex;
@@ -156,19 +174,34 @@ export default {
     font-size: 14px;
     line-height: 1.4em;
   }
-  .agreement input {
+
+  .agreement__input {
     width: 15px;
     height: 15px;
     margin: 2px 10px 0 0;
   }
-  .agreement span {
+
+  .agreement__label {
     width: calc(100% - 25px);
   }
-  .errors {
+
+  .entry-form__errors {
     display: block;
     width: 100%;
-    font-size: 14px;
+    font-size: 12px;
     color: #db2829;
-    padding: 10px 0;
+  }
+
+  /*********************************** Responsive styles */
+
+  @media screen and (max-width: 767px) {
+    .about-us { 
+      width: 100%; 
+      order: 2; 
+    }
+    .entry-form__container { 
+      width: 100%; 
+      margin: 0 0 20px; 
+    }
   }
 </style>
