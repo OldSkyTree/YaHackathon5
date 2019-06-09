@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="profile">
     {{ user.username }}
     <button
       type="button"
@@ -103,3 +103,9 @@ export default {
 	}
 };
 </script>
+
+<style>
+.profile {
+	text-align: center;
+}
+</style>
