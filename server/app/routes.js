@@ -105,9 +105,9 @@ module.exports = function(app) {
 	});
 
 	app.post('/turn', function (req, res) {
-		let { user, combat_id, turn } = req.body;
+		let { token, combat_id, turn } = req.body;
 
-		returnOriginData(combat.strike(user, combat_id, turn), res);
+		returnOriginData(combat.strike(token, combat_id, turn), res);
 	});
 
 	app.get('/status', function (req, res) {

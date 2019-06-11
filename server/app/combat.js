@@ -14,13 +14,13 @@ module.exports = {
 		});
 	},
 
-	strike : function(user, combat_id, turn) {
+	strike : function(token, combat_id, turn) {
 		return axios({
 			method : 'post',
 			url : `${BASE_URL}/turn`,
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			data : formUrlEncoded({
-				user,
+				token,
 				combat_id,
 				turn
 			})
