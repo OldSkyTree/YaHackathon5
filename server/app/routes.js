@@ -3,7 +3,7 @@ const chat = require('./chat');
 const combat = require('./combat');
 const axios = require('axios');
 
-const BASE_URL = 'http://localhost:3333';
+const BASE_URL = 'https://combats-api-ya.herokuapp.com';
 
 module.exports = function(app) {
 	app.post('/register', function(req, res) {

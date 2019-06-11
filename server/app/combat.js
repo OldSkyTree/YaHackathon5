@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const BASE_URL = 'http://localhost:3333';
+const BASE_URL = 'https://combats-api-ya.herokuapp.com';
 
 module.exports = {
 	startFight : function(token) {
