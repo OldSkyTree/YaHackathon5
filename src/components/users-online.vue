@@ -19,17 +19,25 @@ export default {
 		};
 	},
 	created() {
-		fetch('http://localhost:3000/online')
-			.then(res => res.json())
-			.then(res => {
-				if(res.status === 'ok') {
-					this.usersOnline = res.users;
-				}
-			})
-			.catch(err => {
-				// eslint-disable-next-line no-console
-				console.error(err);
-			});
+		this.updateUsersOnline();
+		setInterval(() => {
+			this.updateUsersOnline();
+		}, 5000);
+	},
+	methods: {
+		updateUsersOnline() {
+			fetch('http://localhost:3000/online')
+				.then(res => res.json())
+				.then(res => {
+					if(res.status === 'ok') {
+						this.usersOnline = res.users;
+					}
+				})
+				.catch(err => {
+					// eslint-disable-next-line no-console
+					console.error(err);
+				});
+		}
 	}
 };
 </script>
