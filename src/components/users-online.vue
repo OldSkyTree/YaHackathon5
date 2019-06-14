@@ -1,10 +1,13 @@
 <template>
-  <div>
-    <h3>Пользователи online</h3>
-    <ul>
+  <div class="users-online">
+    <h3 class="users-online__title">
+      Пользователи online
+    </h3>
+    <ul class="users-online__list">
       <li
         v-for="(user, index) in usersOnline"
         :key="index"
+        class="users-online__list-item"
       >
         {{ user.username }}
       </li>
@@ -41,4 +44,32 @@ export default {
 	}
 };
 </script>
+<style>
+  .users-online {
+    width: 25%;
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .users-online__title {
+    margin: 0;
+    padding: 11px 0;
+  }
+
+  .users-online__list {
+    width: 100%;
+    margin: 0;
+    background: #202020;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 130px;
+    overflow-x: auto;
+  }
+
+  .users-online__list-item {
+    width: 100%;
+    margin: 0 0 5px;
+  }
+</style>
 
