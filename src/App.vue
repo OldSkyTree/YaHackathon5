@@ -37,6 +37,10 @@ export default {
     color: #fff;
   }
 
+  .hidden {
+    display: none;
+  }
+
   #app {
     background: #010205 url('assets/body-login-bg.jpg') no-repeat center top/cover;
     padding: 0 0 38px;

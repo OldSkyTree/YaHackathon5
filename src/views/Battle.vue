@@ -1,8 +1,10 @@
 <template>
   <section class="fight-section">
     <div class="container">
-      {{ combat }}
-      {{ combat.you }}
+      <div class="hidden">
+        {{ combat }}
+        {{ combat.you }}
+      </div>
       <div class="top-page-block">
         <div class="fighter fighter_friend">
           <h3 class="fighter__name">
