@@ -1,19 +1,30 @@
 <template>
   <section class="profile">
-    {{ user.username }}
-    <button
-      type="button"
-      @click="fight"
-    >
-      В бой
-    </button>
+    <div class="container">
+      <div class="top-page-block">
+        <div class="user-info">
+          <h3 class="user-info__name">
+            {{ user.username }}
+          </h3>
+        </div>
+        <div class="user-actions">
+          <button
+            type="button"
+            @click="fight"
+          >
+            В бой
+          </button>
 
-    <div v-if="isPending">
-      {{ currentPendingMessage }}
+          <div v-if="isPending">
+            {{ currentPendingMessage }}
+          </div>
+        </div>
+      </div>
+      <div class="bottom-page-block">
+        <chat />
+        <users-online />
+      </div>
     </div>
-
-    <chat />
-    <users-online />
   </section>
 </template>
 
@@ -105,7 +116,28 @@ export default {
 </script>
 
 <style>
-.profile {
-	text-align: center;
-}
+	.profile {
+		text-align: center;
+	}
+
+	.user-info {
+		width: 25%;
+		display: flex;
+		flex-flow: row wrap;
+		align-items: flex-start;
+		background: url('../assets/img-fighter1.jpg') no-repeat center center/cover;
+	}
+
+	.user-info__name {
+		width: 100%;
+		padding: 5px;
+		background: rgba(0, 0, 0, 0.4);
+		text-align: center;
+	}
+
+	.user-actions {
+		width: 50%;
+		padding: 0 10px;
+		box-sizing: border-box;
+	}
 </style>

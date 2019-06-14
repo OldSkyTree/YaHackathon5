@@ -59,8 +59,8 @@
       />
       <button
         type="button"
-        @click="send"
         class="send-message__btn"
+        @click="send"
       >
         Отправить
       </button>
