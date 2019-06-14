@@ -37,6 +37,10 @@ export default {
     color: #fff;
   }
 
+  .hidden {
+    display: none;
+  }
+
   #app {
     background: #010205 url('assets/body-login-bg.jpg') no-repeat center top/cover;
     padding: 0 0 38px;
@@ -50,12 +54,15 @@ export default {
     width: 100%;
     max-width: 1160px;
     margin: 0 auto;
+    padding: 0 20px;
     display: flex;
     flex-flow: row wrap;
+    box-sizing: border-box;
   }
 
-  h1, h2 {
+  h1, h2, h3 {
     font-weight: normal;
+    margin: 0 0 10px;
   }
 
   h1 {
@@ -81,12 +88,30 @@ export default {
     color: #fff;
     text-decoration: none;
   }
+
+  .top-page-block {
+    width: 100%;
+    height: 70vh;
+    max-height: 350px;
+    padding: 0 0 20px;
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+  }
+
+  .bottom-page-block {
+    width: 100%;
+    height: 30vh;
+    max-height: 175px;
+    display: flex;
+    flex-flow: row wrap;
+  }
   
   /*********************************** Responsive styles */
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 767px), (max-height: 767px) {
     #app {
-      height: 100%;
+      height: auto;
     }
   }
 </style>

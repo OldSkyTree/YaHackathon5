@@ -1,10 +1,9 @@
 <template>
-  <section>
+  <section class="chat">
     <div
-      id="tabs"
-      class="tabs-container"
+      class="tabs"
     > 
-      <div class="tabs">
+      <div class="tabs__nav">
         <a
           :class="[ activetab === -1 ? 'active' : '' ]"
           @click="activetab = -1"
@@ -16,18 +15,18 @@
           @click="activetab = index"
         >{{ chat.chatName }}</a>
       </div>
-      <div class="content">
+      <div class="tabs__content">
         <div
           v-if="activetab === -1"
-          class="tabcontent"
+          class="tabs__content-item"
         >
           <div
             v-for="(message, index) in messages"
             :key="index"    
           >
-            @{{ message.user.username }}
             {{ new Date(message.timestamp).toLocaleTimeString() }}
-
+            @{{ message.user.username }}
+            
             {{ message.message }}
           </div>
         </div>
@@ -37,7 +36,7 @@
         >
           <div
             v-if="activetab === upper_index"
-            class="tabcontent"
+            class="tabs__content-item"
           >
             <div
               v-for="(message, index) in chat"
@@ -53,10 +52,14 @@
       </div>
     </div>
 
-    <form>
-      <textarea v-model="newMessage" />
+    <form class="send-message">
+      <textarea 
+        v-model="newMessage"
+        class="send-message__textarea"
+      />
       <button
         type="button"
+        class="send-message__btn"
         @click="send"
       >
         Отправить
@@ -144,29 +147,30 @@ export default {
 </script>
 
 <style>
-.tabs-container {  
-    max-width: 620px; 
-    min-width: 420px;
-    margin: 40px auto;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.9em;
-    color: #888;
+.chat {
+  width: 75%;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.tabs {  
+  width: 100%;
 }
 
 /* Style the tabs */
-.tabs {
+.tabs__nav {
   overflow: hidden;
   margin-left: 20px;
   /*hide bottom border*/ 
-  margin-bottom: -2px; 
+  margin-bottom: -1px; 
 }
 
-.tabs ul {
+.tabs__nav ul {
   list-style-type: none;
   margin-left: 20px;
 }
 
-.tabs a{
+.tabs__nav a {
   color: #000;
   float: left;
   cursor: pointer;
@@ -179,18 +183,18 @@ export default {
   font-weight: bold;
 
 }
-.tabs a:last-child { 
+.tabs__nav a:last-child { 
   border-right: 1px solid #ccc;
 }
 
 /* Change background color of tabs on hover */
-.tabs a:hover {
+.tabs__nav a:hover {
   background-color: #aaa;
   color: #fff;
 }
 
 /* Styling for active tab */
-.tabs a.active {
+.tabs__nav a.active {
   background-color: #fff;
   color: #484848;
   border-bottom: 2px solid #fff;
@@ -198,11 +202,30 @@ export default {
 }
 
 /* Style the tab content */
-.tabcontent {
-  padding: 30px;
+.tabs__content {
   background-color: #202020;
   border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 3px 3px 6px #e1e1e1
+  padding: 10px 20px;
+  box-sizing: border-box;
+  height: 80px;
+  overflow-x: auto;
+}
+
+.send-message {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+.send-message__textarea {
+  width: 80%;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  resize: none;
+  height: 50px;
+  font-size: 16px;
+}
+.send-message__btn {
+  width: 20%;
+  box-sizing: border-box;
 }
 </style>
