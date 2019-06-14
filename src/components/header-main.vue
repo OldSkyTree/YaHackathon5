@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header header_small">
     <router-link
       to="/"
       class="header-logo"
@@ -46,6 +46,11 @@
     display: flex;
     box-sizing: border-box;
     padding: 30px 20px 10px;
+  }
+
+  .header_small {
+    height: 80px;
+    padding: 15px 20px;
   }
 
   .header-logo {
