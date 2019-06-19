@@ -51,7 +51,8 @@ export default {
     box-sizing: border-box;
     padding: 20px 30px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    height: calc(100vh - 120px);
   }
   .about-us {
     width: 50%;

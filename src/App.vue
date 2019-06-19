@@ -35,6 +35,7 @@ export default {
     padding: 0;
     margin: 0;
     color: #fff;
+    min-height: 100vh;
   }
 
   .hidden {
@@ -45,7 +46,7 @@ export default {
     background: #010205 url('assets/body-login-bg.jpg') no-repeat center top/cover;
     padding: 0 0 38px;
     margin: 0;
-    min-height: 100vh;
+    height: 100vh;
     position: relative;
     box-sizing: border-box;
   }
@@ -89,29 +90,68 @@ export default {
     text-decoration: none;
   }
 
-  .top-page-block {
+  .btn-primary,
+  .btn-secondary {
+    padding: 5px 30px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 16px;
+    border: 1px solid #fff;
+    border: none;
+  }
+
+  .btn-primary {
+    background: #202020;
+    color: #fff;
+  }
+
+  .btn-secondary {
+    background: #d92424;
+    color: #fff;
+  }
+
+  .btn-secondary:disabled {
+    background: #ccc;
+  }
+
+  .page-section {
+    min-height: 530px;
+    height: calc(100vh - 120px);
+    display: flex;
+  }
+
+  .page-section__content {
+    background: rgba(10, 25, 32, 0.8);
     width: 100%;
-    height: 70vh;
-    max-height: 350px;
+    text-align: center;
+    padding: 50px 0;
+  }
+
+  .page-section__top-block {
+    width: 100%;
+    height: 60%;
+    min-height: 300px;
     padding: 0 0 20px;
     display: flex;
     flex-flow: row wrap;
     box-sizing: border-box;
   }
 
-  .bottom-page-block {
+  .page-section__bottom-block {
     width: 100%;
-    height: 30vh;
-    max-height: 175px;
+    height: 40%;
+    min-height: 150px;
     display: flex;
     flex-flow: row wrap;
+    margin-top: auto;
   }
   
   /*********************************** Responsive styles */
 
-  @media screen and (max-width: 767px), (max-height: 767px) {
+  @media screen and (max-width: 1023px), (max-height: 640px) {
     #app {
       height: auto;
+      min-height: 100vh;
     }
   }
 </style>

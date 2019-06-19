@@ -1,7 +1,7 @@
 <template>
-  <section class="profile">
+  <section class="page-section">
     <div class="container">
-      <div class="top-page-block">
+      <div class="page-section__top-block">
         <div class="user-info">
           <h3 class="user-info__name">
             {{ user.username }}
@@ -10,17 +10,21 @@
         <div class="user-actions">
           <button
             type="button"
+            class="btn-secondary"
             @click="fight"
           >
             В бой
           </button>
 
-          <div v-if="isPending">
+          <div
+            v-if="isPending"
+            class="before-fight-talks"
+          >
             {{ currentPendingMessage }}
           </div>
         </div>
       </div>
-      <div class="bottom-page-block">
+      <div class="page-section__bottom-block">
         <chat />
         <users-online />
       </div>
@@ -139,5 +143,10 @@ export default {
 		width: 50%;
 		padding: 0 10px;
 		box-sizing: border-box;
+    text-align: center;
 	}
+
+  .before-fight-talks {
+    padding: 20px 0;
+  }
 </style>
