@@ -49,11 +49,21 @@ export default {
     width: 25%;
     display: flex;
     flex-flow: row wrap;
+    align-content: flex-start;
   }
 
   .users-online__title {
     margin: 0;
-    padding: 11px 0;
+    padding: 11px 15px;
+    background: #202020;
+    color: #fff;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px 10px 0 0;
+    height: 43px;
+    overflow: hidden;
   }
 
   .users-online__list {
@@ -63,13 +73,21 @@ export default {
     border: 1px solid #ccc;
     padding: 10px;
     box-sizing: border-box;
-    height: 130px;
+    height: calc(100% - 43px);
     overflow-x: auto;
   }
 
   .users-online__list-item {
     width: 100%;
     margin: 0 0 5px;
+  }
+
+  /*********************************** Responsive styles */
+
+  @media screen and (max-width: 1023px) {
+    .users-online {
+      width: 100%;
+    }
   }
 </style>
 
