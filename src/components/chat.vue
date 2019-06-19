@@ -21,9 +21,9 @@
           class="chat__list"
         >
           <li
-            class="chat__message"
             v-for="(message, index) in messages"
-            :key="index"    
+            :key="index"
+            class="chat__message"
           >
             <span class="chat__message-time">
               {{ new Date(message.timestamp).toLocaleTimeString() }}
@@ -32,8 +32,8 @@
               @{{ message.user.username }}
             </span>
             <span class="chat__message-text">
-                {{ message.message }}
-              </span>
+              {{ message.message }}
+            </span>
           </li>
         </ul>
         <div
@@ -45,9 +45,9 @@
             class="chat__list"
           >
             <li
-              class="chat__message"
               v-for="(message, index) in chat"
               :key="index"
+              class="chat__message"
             >
               <span class="chat__message-author">
                 @{{ message.user.username }}
