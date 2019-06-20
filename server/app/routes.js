@@ -101,19 +101,26 @@ module.exports = function(app) {
 	app.post('/fight', function (req, res) {
 		let { token } = req.body;
 
-		returnOriginData(combat.startFight(token), res);
+		combat.processCombatResponse(combat.startFight(token), res);
+		// returnOriginData(combat.startFight(token), res);
 	});
 
 	app.post('/turn', function (req, res) {
 		let { token, combat_id, turn } = req.body;
 
-		returnOriginData(combat.strike(token, combat_id, turn), res);
+		combat.processCombatResponse(combat.strike(token, combat_id, turn), res);
+		// returnOriginData(combat.strike(token, combat_id, turn), res);
 	});
 
 	app.get('/status', function (req, res) {
 		let { token, combat_id } = req.query;
 
-		returnOriginData(combat.getCombatInfo(token, combat_id), res);
+		combat.processCombatResponse(combat.getCombatInfo(token, combat_id), res);
+		// returnOriginData(combat.getCombatInfo(token, combat_id), res);
+	});
+
+	app.get('/top-player', function () {
+		axios.get();
 	});
 };
 
