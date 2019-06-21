@@ -1,7 +1,8 @@
 const axios = require('axios');
 const fs = require('fs');
 
-const BASE_URL = 'https://combats-api-ya.herokuapp.com';
+// const BASE_URL = 'https://combats-api-ya.herokuapp.com';
+const BASE_URL = 'http://localhost:3333';
 
 module.exports = {
 	init: function() {
@@ -49,7 +50,6 @@ module.exports = {
 
 	write: function() {
 		this.init();
-
 		fs.writeFileSync('./server/json/users.json', JSON.stringify(this._users, null, 4));
 	}
 };

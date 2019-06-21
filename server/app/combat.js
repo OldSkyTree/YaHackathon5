@@ -1,7 +1,8 @@
 const axios = require('axios');
 const users = require('./users');
 
-const BASE_URL = 'https://combats-api-ya.herokuapp.com';
+// const BASE_URL = 'https://combats-api-ya.herokuapp.com';
+const BASE_URL = 'http://localhost:3333';
 
 module.exports = {
 	startFight : function(token) {
@@ -41,22 +42,26 @@ module.exports = {
 				const yourHealth = data.combat.you.health;
 				const enemyHealth = data.combat.enemy.health;
 				let result;
-				if (yourHealth > enemyHealth) {
+				if (yourHealth <= 0 &&  enemyHealth <= 0) {
+					result = 'draw';
+				}
+				else if (yourHealth > 0) {
 					result = 'victory';
 				}
-				else if (yourHealth < enemyHealth) {
-					result = 'defeat';
-				}
 				else {
-					result = 'draw';
+					result = 'defeat';
 				}
 				users.addBattle(data.combat.you.id, data.combat.id, result);
 			}
 			res.send(data);
 		}).catch(function (response) {
-			console.log('RESPONSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: ', response);
-			const data = response.response.data;
-			res.status(response.response.status).send(data);
+			if (response && response.response) {
+				const data = response.response.data;
+				res.status(response.response.status).send(data);
+			}
+			else {
+				res.status(500);
+			}
 		});
 	}
 };
