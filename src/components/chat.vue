@@ -86,13 +86,14 @@ export default {
 			chats: [],
 			messages: [],
 			newMessage: '',
-			activetab: -1
+			activetab: -1,
+			chatIntervalId: 0
 		};
 	},
 	created() {
 		const timestamp = Date.now();
 
-		setInterval(() => {
+		this.chatIntervalId = setInterval(() => {
 			const user = localStorage.getItem('user');
 			if(!user) return;
 
@@ -121,6 +122,9 @@ export default {
 				});
 
 		}, 1000);
+	},
+	destroyed() {
+		clearInterval(this.chatIntervalId);
 	},
 	methods: {
 		send() {

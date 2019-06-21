@@ -63,6 +63,10 @@ module.exports = {
 				res.status(500);
 			}
 		});
+	},
+	
+	generateFunnyPhrase: function(hit, blocked, origin, target) {
+		return `${origin.username} ${blocked ? 'промахнулся' : 'попал'} по ${target.username} с ${hit}`;
 	}
 };
 
