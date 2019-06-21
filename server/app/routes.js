@@ -10,13 +10,15 @@ module.exports = function(app) {
 	app.post('/register', function(req, res) {
 		const {username, password} = req.body;
 
-		returnOriginData(users.registerUser(username, password), res);
+		users.updateLocalDB(users.registerUser(username, password), res);
+		// returnOriginData(users.registerUser(username, password), res);
 	});
 
 	app.post('/login', function (req, res) {
 		const {username, password} = req.body;
 
-		returnOriginData(users.loginUser(username, password), res);
+		users.updateLocalDB(users.loginUser(username, password), res);
+		// returnOriginData(users.loginUser(username, password), res);
 	});
     
 	app.get('/ping', function (req, res) {
@@ -102,14 +104,12 @@ module.exports = function(app) {
 	app.post('/fight', function (req, res) {
 		let { token } = req.body;
 
-		// combat.processCombatResponse(combat.startFight(token), res);
 		returnOriginData(combat.startFight(token), res);
 	});
 
 	app.post('/turn', function (req, res) {
 		let { token, combat_id, turn } = req.body;
 
-		// combat.processCombatResponse(combat.strike(token, combat_id, turn), res);
 		returnOriginData(combat.strike(token, combat_id, turn), res);
 	});
 
@@ -117,11 +117,11 @@ module.exports = function(app) {
 		let { token, combat_id } = req.query;
 
 		combat.processCombatResponse(combat.getCombatInfo(token, combat_id), res);
-		// returnOriginData(combat.getCombatInfo(token, combat_id), res);
 	});
 
-	app.get('/top-player', function () {
-		axios.get();
+	app.get('/top-player', function (req, res) {
+		const { token } = req.query;
+		res.send(users.usersRating(token));
 	});
 };
 

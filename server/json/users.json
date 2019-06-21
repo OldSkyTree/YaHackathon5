@@ -1,1 +1,94 @@
-[]
+[
+    {
+        "id": "UL43I8",
+        "combats": [
+            {
+                "id": "GbnZKZ",
+                "result": "defeat"
+            },
+            {
+                "id": "x1yxoZ",
+                "result": "draw"
+            },
+            {
+                "id": "2VRDjf",
+                "result": "draw"
+            },
+            {
+                "id": "5IFRVV",
+                "result": "draw"
+            },
+            {
+                "id": "YhmItW",
+                "result": "defeat"
+            }
+        ],
+        "username": "Daddy"
+    },
+    {
+        "id": "yD_oNO",
+        "combats": [
+            {
+                "id": "GbnZKZ",
+                "result": "victory"
+            },
+            {
+                "id": "x1yxoZ",
+                "result": "draw"
+            },
+            {
+                "id": "2VRDjf",
+                "result": "draw"
+            },
+            {
+                "id": "h-B-nm",
+                "result": "defeat"
+            },
+            {
+                "id": "4v38Bq",
+                "result": "draw"
+            },
+            {
+                "id": "sbHfoM",
+                "result": "draw"
+            }
+        ],
+        "username": "NewUser1"
+    },
+    {
+        "id": "Uo8eJU",
+        "combats": [
+            {
+                "id": "h-B-nm",
+                "result": "victory"
+            },
+            {
+                "id": "4v38Bq",
+                "result": "draw"
+            },
+            {
+                "id": "sbHfoM",
+                "result": "draw"
+            }
+        ],
+        "username": "zzzzz"
+    },
+    {
+        "id": "RxYqIV",
+        "username": "Ellen",
+        "combats": [
+            {
+                "id": "5IFRVV",
+                "result": "draw"
+            },
+            {
+                "id": "YhmItW",
+                "result": "victory"
+            }
+        ]
+    },
+    {
+        "id": "IzFAvp",
+        "username": "aaaaa"
+    }
+]
