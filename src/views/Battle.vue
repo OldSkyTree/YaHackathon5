@@ -65,10 +65,14 @@
           </div>
           <div class="fight__log">
             <ul>
-              <li>[06:00] [Lord of the Pit] нанес первый удар, но предусмотрительный [Helpless Knight] отбил удар</li>
-              <li>[06:00] [Lord of the Pit] нанес первый удар, но предусмотрительный [Helpless Knight] отбил удар</li>
-              <li>[06:00] [Lord of the Pit] нанес первый удар, но предусмотрительный [Helpless Knight] отбил удар</li>
-              <li>[06:00] [Lord of the Pit] нанес первый удар, но предусмотрительный [Helpless Knight] отбил удар</li>
+              <li
+                v-for="(log, index) in logs"
+                :key="index"
+              >
+                {{ new Date(log.timestamp).toLocaleTimeString() }}
+                @{{ log.user.username }}
+                {{ log.message }}
+              </li>
             </ul>
           </div>
         </div>
@@ -116,7 +120,8 @@ export default {
 				username: '',
 				health: ''
 			},
-			statusCombat: ''
+			statusCombat: '',
+			logs: []
 		};
 	},
 	created() {
@@ -188,10 +193,19 @@ export default {
                     
 										this.statusCombat = 'Ждем ход противника!';
 									}
-
+									fetch(`http://localhost:3000/log?token=${this.combat.you.token}&combat_id=${this.combat.id}`, {
+										method: 'GET'
+									})
+										.then(res => res.json())
+										.then(res => {
+											this.logs = res;
+										})
+										.catch(err => {
+											// eslint-disable-next-line no-console
+											console.error(err);
+										});
 									this.updateHealth(res.combat.you, this.you);
 									this.updateHealth(res.combat.enemy, this.enemy);
-                  
 								})
 								.catch(err => {
 									// eslint-disable-next-line no-console

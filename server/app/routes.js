@@ -76,7 +76,6 @@ module.exports = function(app) {
 					if (receiver) {
 						const receiverName = receiver[1].substring(1);
 						element.message = element.message.replace(receiver[0], '');
-						//element.receiver = receiverName;
 
 						if (receiverName === username) {
 							pushMessageToDialog(privateChats, element.user.username, element);
@@ -123,15 +122,55 @@ module.exports = function(app) {
 		const { token } = req.query;
 		res.send(users.usersRating(token));
 	});
+
+	app.get('/log', function(req, res) {
+		let {token, combat_id} = req.query;
+
+		var self = combat;
+		combat.getCombatInfo(token, combat_id)
+			.then(function (response) {
+				const data = response.data;
+				res.send(data.combat.results.reduce(function(result, current) {
+					current.forEach(function(strike) {
+						const { hit, blocked, origin, target } = strike;
+						const message = self.generateFunnyPhrase(hit, blocked, origin, target);
+						result.push({
+							message,
+							timestamp : origin.last_active,
+							user: origin
+						});
+					});
+					return result;
+				}, []));
+			})
+			.catch(function(error) {
+				if (error.response) {
+					const data = error.response.data;
+					res.status(error.response.status).send(data);
+				}
+				else {
+					// eslint-disable-next-line no-console
+					console.error('Error:', error);
+					res.status(500);
+				}
+			});
+	});
 };
 
 const returnOriginData = function (axiosPromise, res) {
 	axiosPromise.then(function (response) {
 		let data = response.data;
 		res.send(data);
-	}).catch(function (response) {
-		const data = response.response.data;
-		res.status(response.response.status).send(data);
+	}).catch(function (error) {
+		if (error.response) {
+			const data = error.response.data;
+			res.status(error.response.status).send(data);
+		}
+		else {
+			// eslint-disable-next-line no-console
+			console.error('Error:', error);
+			res.status(500);
+		}
 	});
 };
 

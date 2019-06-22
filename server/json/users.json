@@ -51,6 +51,10 @@
             {
                 "id": "sbHfoM",
                 "result": "draw"
+            },
+            {
+                "id": "s8ldAi",
+                "result": "victory"
             }
         ],
         "username": "NewUser1"
@@ -69,6 +73,10 @@
             {
                 "id": "sbHfoM",
                 "result": "draw"
+            },
+            {
+                "id": "s8ldAi",
+                "result": "defeat"
             }
         ],
         "username": "zzzzz"
