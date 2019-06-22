@@ -229,6 +229,7 @@ export default {
   .chat__list {
     width: 100%;
     margin: 0;
+    max-height: 100px;
   }
 
   .chat__message {
