@@ -11,7 +11,7 @@
     "test": "echo \"Test successfully completed\" && exit 0",
     "lint": "eslint . --ext .js,.vue",
     "lint-fix": "eslint . --fix --ext .js,.vue",
-    "server": "node server/server.js"
+    "start": "node server/server.js"
   },
   "husky": {
     "hooks": {
