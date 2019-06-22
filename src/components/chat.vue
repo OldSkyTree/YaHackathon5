@@ -65,12 +65,12 @@
     </div>
 
     <form class="send-message">
-      <textarea 
+      <input 
         v-model="newMessage"
         class="send-message__textarea"
-      />
+        @keydown.enter="send($event)"
+      >
       <button
-        type="button"
         class="send-message__btn"
         @click="send"
       >
@@ -127,7 +127,8 @@ export default {
 		clearInterval(this.chatIntervalId);
 	},
 	methods: {
-		send() {
+		send(event) {
+			event.preventDefault();
 			const user = localStorage.getItem('user');
 			if(!user) return;
 
@@ -216,7 +217,7 @@ export default {
     padding: 10px 20px;
     box-sizing: border-box;
     height: calc(100% - 43px);
-    overflow-x: auto;
+    overflow-y: auto;
   }
 
   .chat {
