@@ -104,9 +104,10 @@
                 v-for="(log, index) in logs"
                 :key="index"
               >
-                {{ new Date(log.timestamp).toLocaleTimeString() }}
-                @{{ log.user.username }}
-                {{ log.message }}
+                <span class="log_message_time"> 
+                  {{ new Date(log.timestamp).toLocaleTimeString() }}
+                </span>
+                <span v-html="log.message" />
               </li>
             </ul>
           </div>
@@ -417,6 +418,18 @@ export default {
     padding: 10px;
     margin: 0 10px;
     box-sizing: border-box;
+	}
+
+	.log_message_user {
+		color: #905656;
+	}
+
+	.log_message_time {
+		color: #398454;
+	}
+
+	.log_message_part {
+		color: #847339;
 	}
 
 	/*********************************** Responsive styles */

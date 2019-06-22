@@ -1,5 +1,6 @@
 const axios = require('axios');
 const users = require('./users');
+const _ = require('lodash');
 
 // const BASE_URL = 'https://combats-api-ya.herokuapp.com';
 const BASE_URL = 'http://localhost:3333';
@@ -66,35 +67,37 @@ module.exports = {
 	},
 	
 	generateFunnyPhrase: function(hit, blocked, origin, target) {
-		const bodyParts = ['Голова', 'Пояс', 'Корпус', 'Ноги'];
-		
-		return `${origin.username} ${blocked ? 'промахнулся' : 'попал'} по ${target.username} с ${bodyParts[hit - 1]}`;
+
+		const phrases_hit = [
+			`Находчивый ${getHtmlUsername(origin)} провел хук справа, лишив ${getHtmlUsername(target)} надежды на победу`,
+			`Отчаявшийся ${getHtmlUsername(origin)} наградил ${getHtmlUsername(target)} дубиной по ${getHtmlPart(hit)}, и он не увернулся`,
+			`${getHtmlUsername(origin)} оказался не таким уж и беспомощным и ударил ${getHtmlUsername(target)} в ${getHtmlPart(hit)}`,
+			`Хитрый ${getHtmlUsername(origin)} сводил мамку ${getHtmlUsername(target)} в кино`
+		];
+		const phrases_block = [
+			`${getHtmlUsername(origin)} нанес жесткий удар по ${getHtmlPart(hit)}, но ${getHtmlUsername(target)} отбился`,
+			`${getHtmlUsername(origin)} хотел разбить ${getHtmlUsername(target)} ${getHtmlPart(hit)}, но поскользнулся на голубином помёте`,
+			`${getHtmlUsername(origin)} отвратным образом убил ${getHtmlUsername(target)} но появившаяся из ниоткуда <span class="log_message_user">[Angel]</span> воскресила его`,
+			`${getHtmlUsername(origin)} хотел было ударить ${getHtmlUsername(target)}, но вспомнил, что он работает в 1С`
+		];
+
+		if (blocked) {
+			return _.sample(phrases_block);
+		}
+		else {
+			return _.sample(phrases_hit);
+		}
 	}
 };
 
 const formUrlEncoded = x =>
 	Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
 
-// const processCombatResponse = function (axiosPromise, res) {
-// 	axiosPromise.then(function (response) {
-// 		let data = response & response.data;
-// 		if (data.combat.status === 'finished') {
-// 			const yourHealth = data.combat.you.health;
-// 			const enemyHealth = data.combat.enemy.health;
-// 			if (yourHealth > enemyHealth) {
-// 				result = 'victory';
-// 			}
-// 			else if (yourHealth < enemyHealth) {
-// 				result = 'defeat';
-// 			}
-// 			else {
-// 				result = 'draw';
-// 			}
-// 			users.addBattle(data.combat.you.id, data.combat.id, result);
-// 		}
-// 		res.send(data);
-// 	}).catch(function (response) {
-// 		const data = response.response & response.response.data;
-// 		res.status(response.response.status).send(data);
-// 	});
-// };
+const getHtmlUsername = user => {
+	return `<span class="log_message_user">[${user.username}]</span>`;
+};
+
+const getHtmlPart = part => {
+	const bodyParts = ['Голова', 'Пояс', 'Корпус', 'Ноги'];
+	return `<span class="log_message_part">${bodyParts[part + 1]}</span>`;
+};
