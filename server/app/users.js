@@ -55,6 +55,7 @@ module.exports = {
 			
 			let wins = 0;
 			let loses = 0;
+			let draws = 0;
 			if (!current.combats) {
 				return result;
 			}
@@ -67,14 +68,13 @@ module.exports = {
 					loses++;
 					break;
 				case 'draw':
-					wins++;
-					loses++;
+					draws++;
 					break;
 				default:
 					break;
 				}
 			});
-			user.winrate = (wins / (wins + loses)).toFixed(2) * 100;
+			user.winrate = (wins / (wins + loses + draws)).toFixed(2) * 100;
 
 			result.push(user);
 			
