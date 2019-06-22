@@ -14,7 +14,10 @@
             <span class="fighter__health-text">
               {{ you.health }}
             </span>
-            <span class="fighter__health-bar" />
+            <span
+              class="fighter__health-bar"
+              :style="{ width: `${you.health / (30/100)}%` }"
+            />
           </div>
         </div>
         <div class="fight">
@@ -23,16 +26,32 @@
               <h3 class="fight__btns-title">
                 Атака
               </h3>
-              <button class="fight__btn fight__btn_attack">
+              <button
+                class="fight__btn fight__btn_attack"
+                :class="hit === 1 ? 'fight__btn_attack-active' : ''"
+                @click="hit = 1"
+              >
                 Голова
               </button>
-              <button class="fight__btn fight__btn_attack">
+              <button
+                class="fight__btn fight__btn_attack"
+                :class="hit === 2 ? 'fight__btn_attack-active' : ''"
+                @click="hit = 2"
+              >
                 Пояс
               </button>
-              <button class="fight__btn fight__btn_attack">
+              <button
+                class="fight__btn fight__btn_attack"
+                :class="hit === 3 ? 'fight__btn_attack-active' : ''"
+                @click="hit = 3"
+              >
                 Корпус
               </button>
-              <button class="fight__btn fight__btn_attack">
+              <button
+                class="fight__btn fight__btn_attack"
+                :class="hit === 4 ? 'fight__btn_attack-active' : ''"
+                @click="hit = 4"
+              >
                 Ноги
               </button>
             </div>
@@ -40,16 +59,32 @@
               <h3 class="fight__btns-title">
                 Защита
               </h3>
-              <button class="fight__btn fight__btn_defence">
+              <button
+                class="fight__btn fight__btn_defence"
+                :class="{ 'fight__btn_defence-active': blocks.includes('1') }"
+                @click="selectBlock('1')"
+              >
                 Голова
               </button>
-              <button class="fight__btn fight__btn_defence">
+              <button
+                class="fight__btn fight__btn_defence"
+                :class="{ 'fight__btn_defence-active': blocks.includes('2') }"
+                @click="selectBlock('2')"
+              >
                 Пояс
               </button>
-              <button class="fight__btn fight__btn_defence">
+              <button
+                class="fight__btn fight__btn_defence"
+                :class="checkBlock('3') ? 'fight__btn_defence-active' : ''"
+                @click="selectBlock('3')"
+              >
                 Корпус
               </button>
-              <button class="fight__btn fight__btn_defence">
+              <button
+                class="fight__btn fight__btn_defence"
+                :class="checkBlock('4') ? 'fight__btn_defence-active' : ''"
+                @click="selectBlock('4')"
+              >
                 Ноги
               </button>
             </div>
@@ -84,7 +119,10 @@
             <span class="fighter__health-text">
               {{ enemy.health }}
             </span>
-            <span class="fighter__health-bar" />
+            <span
+              class="fighter__health-bar"
+              :style="{ width: `${enemy.health / (30/100)}%` }"
+            />
           </div>
         </div>
       </div>
@@ -110,8 +148,8 @@ export default {
 		return {
 			isWaitingForEnemy: false,
 			combat: '',
-			hit: 'удар в голову',
-			blocks: ['защита головы', 'защита туловища'],
+			hit: 0,
+			blocks: [],
 			you: {
 				username: '',
 				health: ''
@@ -129,9 +167,19 @@ export default {
     
 		this.you = this.combat.you;
 		this.enemy = this.combat.enemy;
-
 	},
 	methods: {
+		
+		checkBlock(blockIndex) {
+			return this.blocks.find(blockItem => blockItem == blockIndex) === undefined ? false : true;
+		},
+		selectBlock(blockIndex) {
+			this.blocks.push(blockIndex);
+
+			if(this.blocks.length > 2) {
+				this.blocks = this.blocks.slice(1);
+			}
+		},
 		updateHealth(newUserData, oldUserData) {
 			if(newUserData.health !== oldUserData.health) {
 				oldUserData.health = newUserData.health;
@@ -139,6 +187,16 @@ export default {
 		},
 		fight() {
 			if(this.isWaitingForEnemy) return;
+
+			if(!this.hit) {
+				alert('Ты не выбрал атаку!');
+				return;
+			}
+
+			if(this.blocks.length < 2) {
+				alert('Выбери 2 блока!');
+				return;
+			}
 
 			fetch('http://localhost:3000/turn', {
 				method: 'POST',
@@ -156,6 +214,9 @@ export default {
 				.then(res => {
 
 					if(res.status === 'ok') {
+						
+						this.hit = 0;
+						this.blocks = [];
 
 						let getStatus = setInterval(() => {
 							fetch(`http://localhost:3000/status?token=${this.combat.you.token}&combat_id=${this.combat.id}`, {
@@ -193,6 +254,7 @@ export default {
                     
 										this.statusCombat = 'Ждем ход противника!';
 									}
+
 									fetch(`http://localhost:3000/log?token=${this.combat.you.token}&combat_id=${this.combat.id}`, {
 										method: 'GET'
 									})
@@ -259,13 +321,14 @@ export default {
   }
 
 	.fighter__health-bar {
-    display: block;
+		display: block;
 		width: 100%;
 		height: 100%;
 		background: #398354;
-    position: absolute;
-    left: 0;
-    top: 0;
+		position: absolute;
+		left: 0;
+		top: 0;
+		transition: all .25s;
 	}
 
   .fighter__health-text {
@@ -307,6 +370,11 @@ export default {
 	.fight__btn_attack {
 		background: #915757;
 	}
+	
+	.fight__btn_attack-active {
+		z-index: 1;
+		outline: 1px solid #f00;
+	}
 
 	.fight__btn_attack:hover {
 		background: #b49797;
@@ -314,6 +382,11 @@ export default {
 
 	.fight__btn_defence {
 		background: #398354;
+	}
+	
+	.fight__btn_defence-active {
+		z-index: 1;
+		outline: 1px solid #fff;
 	}
 
 	.fight__btn_defence:hover {
