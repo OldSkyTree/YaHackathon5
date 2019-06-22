@@ -14,7 +14,12 @@
         class="input__element"
       >
       <span class="entry-form__errors">
-        {{ $validateErrorsMsgFrom(errors.login) }}
+        <p
+          v-for="(error, index) in $validateErrorsMsgFrom(errors.login)"
+          :key="index"
+        >
+          {{ error }}
+        </p>
       </span>
     </label>
     <label class="input">
@@ -25,7 +30,12 @@
         class="input__element"
       >
       <span class="entry-form__errors">
-        {{ $validateErrorsMsgFrom(errors.password) }}
+        <p
+          v-for="(error, index) in $validateErrorsMsgFrom(errors.password)"
+          :key="index"
+        >
+          {{ error }}
+        </p>
       </span>
     </label>
     <div class="buttons-holder">
@@ -42,9 +52,14 @@
         type="checkbox"
         class="agreement__input"
       >
-      <span class="agreement__label">Нажимая на кнопку Войти, вы соглашаетесь с межгалактическим кодексом №756/4</span>
+      <span class="agreement__label">Нажимая на кнопку <i>Создать аккаунт</i>, вы соглашаетесь с межгалактическим кодексом №756/4</span>
       <span class="entry-form__errors">
-        {{ $validateErrorsMsgFrom(errors.codex) }}
+        <p
+          v-for="(error, index) in $validateErrorsMsgFrom(errors.codex)"
+          :key="index"
+        >
+          {{ error }}
+        </p>
       </span>
     </label>
     <div class="entry-form__options">
@@ -70,7 +85,8 @@ export default {
 					label: 'Логин',
 					value: '',
 					required: true,
-					min: 5
+					min: 3,
+					spaces: true
 				},
 				password: {
 					name: 'password',
@@ -106,15 +122,24 @@ export default {
 					.then(res => {
 						if(res.status === 'ok') {
 							localStorage.setItem('user', JSON.stringify(res.user));
-                        
+
 							this.$router.push({ path: '/profile' });
 						}
 						else {
+							this.errors = {
+								login: [
+									{
+										type: 'server',
+										msg: res.message
+									}
+								]
+							};
 							// eslint-disable-next-line no-console
 							console.error('Error');
 						}
 					})
 					.catch(err => {
+						
 						// eslint-disable-next-line no-console
 						console.error(err);
 					});

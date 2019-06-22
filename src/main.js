@@ -13,9 +13,12 @@ import TopPlayers from './views/TopPlayers';
 import AboutDevelopers from './views/AboutDevelopers';
 import Profile from './views/Profile';
 import Battle from './views/Battle';
+import NotFound from './views/NotFound';
 
 const router = new VueRouter({
 	routes: [
+		{ path: '*', redirect: '/404'},
+		{ path: '/404', component: NotFound },
 		{ path: '/', component: Index },
 		{ path: '/about-game', component: AboutGame },
 		{ path: '/top-players', component: TopPlayers },
