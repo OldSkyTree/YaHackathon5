@@ -16,38 +16,50 @@
         >{{ chat.chatName }}</a>
       </div>
       <div class="tabs__content">
-        <div
+        <ul
           v-if="activetab === -1"
-          class="tabs__content-item"
+          class="chat__list"
         >
-          <div
+          <li
             v-for="(message, index) in messages"
-            :key="index"    
+            :key="index"
+            class="chat__message"
           >
-            {{ new Date(message.timestamp).toLocaleTimeString() }}
-            @{{ message.user.username }}
-            
-            {{ message.message }}
-          </div>
-        </div>
+            <span class="chat__message-time">
+              {{ new Date(message.timestamp).toLocaleTimeString() }}
+            </span>
+            <span class="chat__message-author">
+              @{{ message.user.username }}
+            </span>
+            <span class="chat__message-text">
+              {{ message.message }}
+            </span>
+          </li>
+        </ul>
         <div
           v-for="(chat, upper_index) in chats"
           :key="upper_index"
         >
-          <div
+          <ul
             v-if="activetab === upper_index"
-            class="tabs__content-item"
+            class="chat__list"
           >
-            <div
+            <li
               v-for="(message, index) in chat"
               :key="index"
+              class="chat__message"
             >
-              @{{ message.user.username }}
-              {{ new Date(message.timestamp).toLocaleTimeString() }} ({{ new Date(message.timestamp).toLocaleDateString() }})
-
-              {{ message.message }}
-            </div>
-          </div>
+              <span class="chat__message-author">
+                @{{ message.user.username }}
+              </span>
+              <span class="chat__message-time">
+                {{ new Date(message.timestamp).toLocaleTimeString() }} ({{ new Date(message.timestamp).toLocaleDateString() }})
+              </span>
+              <span class="chat__message-text">
+                {{ message.message }}
+              </span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -147,85 +159,124 @@ export default {
 </script>
 
 <style>
-.chat {
-  width: 75%;
-  padding-right: 20px;
-  box-sizing: border-box;
+  .tabs {  
+    width: 100%;
+    height: calc(100% - 50px);
+  }
+
+  /* Style the tabs */
+  .tabs__nav {
+    overflow: hidden;
+    margin-left: 20px;
+    /*hide bottom border*/ 
+    height: 43px;
+  }
+
+  .tabs__nav ul {
+    list-style-type: none;
+    margin-left: 20px;
+  }
+
+  .tabs__nav a {
+    color: #fff;
+    float: left;
+    cursor: pointer;
+    padding: 12px 24px;
+    transition: background 0.2s;
+    border: 1px solid #ccc;
+    border-right: none;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px 10px 0 0;
+  }
+
+  .tabs__nav a:last-child { 
+    border-right: 1px solid #ccc;
+  }
+
+  /* Change background color of tabs on hover */
+  .tabs__nav a:hover {
+    background: #202020;
+  }
+
+  /* Styling for active tab */
+  .tabs__nav a.active {
+    background: #202020;
+    cursor: default;
+    text-decoration: none;
+  }
+
+  /* Style the tab content */
+  .tabs__content {
+    background: #202020;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    height: calc(100% - 43px);
+    overflow-x: auto;
+  }
+
+  .chat {
+    width: 75%;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+
+  .chat__list {
+    width: 100%;
+    margin: 0;
+  }
+
+  .chat__message {
+    width: 100%;
+    margin: 0 0 5px;
+  }
+
+  .chat__message-author {
+    color: #905656;
+  }
+
+  .chat__message-time {
+    color: #398454;
+  }
+
+  .send-message {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    height: 50px;
+  }
+
+  .send-message__textarea {
+    width: 80%;
+    padding: 10px 15px;
+    margin: 0;
+    box-sizing: border-box;
+    resize: none;
+    height: 50px;
+    font-size: 16px;
+    background: #202020;
+    border: 1px solid #ccc;
+    border-top: none;
+    color: #fff;
+  }
+
+  .send-message__btn {
+    width: 20%;
+    box-sizing: border-box;
+    background: #202020;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-left: none;
+    color: #fff;
+    height: 50px;
+    cursor: pointer;
 }
 
-.tabs {  
-  width: 100%;
-}
-
-/* Style the tabs */
-.tabs__nav {
-  overflow: hidden;
-  margin-left: 20px;
-  /*hide bottom border*/ 
-  margin-bottom: -1px; 
-}
-
-.tabs__nav ul {
-  list-style-type: none;
-  margin-left: 20px;
-}
-
-.tabs__nav a {
-  color: #000;
-  float: left;
-  cursor: pointer;
-  padding: 12px 24px;
-  transition: background-color 0.2s;
-  border: 1px solid #ccc;
-  border-right: none;
-  background-color: #f1f1f1;
-  border-radius: 10px 10px 0 0;
-  font-weight: bold;
-
-}
-.tabs__nav a:last-child { 
-  border-right: 1px solid #ccc;
-}
-
-/* Change background color of tabs on hover */
-.tabs__nav a:hover {
-  background-color: #aaa;
-  color: #fff;
-}
-
-/* Styling for active tab */
-.tabs__nav a.active {
-  background-color: #fff;
-  color: #484848;
-  border-bottom: 2px solid #fff;
-  cursor: default;
-}
-
-/* Style the tab content */
-.tabs__content {
-  background-color: #202020;
-  border: 1px solid #ccc;
-  padding: 10px 20px;
-  box-sizing: border-box;
-  height: 80px;
-  overflow-x: auto;
-}
-
-.send-message {
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-}
-.send-message__textarea {
-  width: 80%;
-  padding: 10px 15px;
-  box-sizing: border-box;
-  resize: none;
-  height: 50px;
-  font-size: 16px;
-}
-.send-message__btn {
-  width: 20%;
-  box-sizing: border-box;
-}
+  @media screen and (max-width: 1023px) {
+    .chat {
+      width: 100%;
+      padding: 0;
+      margin: 0 0 20px;
+    }
+  }
 </style>

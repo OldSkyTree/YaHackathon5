@@ -1,17 +1,20 @@
 <template>
-  <section class="fight-section">
+  <section class="page-section">
     <div class="container">
       <div class="hidden">
         {{ combat }}
         {{ combat.you }}
       </div>
-      <div class="top-page-block">
+      <div class="page-section__top-block">
         <div class="fighter fighter_friend">
           <h3 class="fighter__name">
             {{ you.username }}
           </h3>
           <div class="fighter__health">
-            {{ you.health }}
+            <span class="fighter__health-text">
+              {{ you.health }}
+            </span>
+            <span class="fighter__health-bar" />
           </div>
         </div>
         <div class="fight">
@@ -53,7 +56,7 @@
             <div class="fight__hit">
               <button
                 :disabled="isWaitingForEnemy"
-                class="fight__hit-btn"
+                class="btn-secondary fight__hit-btn"
                 @click="fight"
               >
                 Fight!
@@ -74,11 +77,14 @@
             {{ enemy.username }}
           </h3>
           <div class="fighter__health">
-            {{ enemy.health }}
+            <span class="fighter__health-text">
+              {{ enemy.health }}
+            </span>
+            <span class="fighter__health-bar" />
           </div>
         </div>
       </div>
-      <div class="bottom-page-block">
+      <div class="page-section__bottom-block">
         <chat />
         <users-online />
       </div>
@@ -206,12 +212,9 @@ export default {
 };
 </script>
 <style>
-	.fight-section .container {
-		height: calc(100vh - 120px);
-	}
-
 	.fighter {
 		width: 25%;
+    height: 100%;
 		display: flex;
 		flex-flow: row wrap;
 		align-items: flex-start;
@@ -232,22 +235,39 @@ export default {
 		text-align: center;
 	}
 
-	.fighter__health {
+  .fighter__health {
+    width: 100%;
+    padding: 5px;
+    background: rgba(0, 0, 0, 1);
+    text-align: center;
+    margin-top: auto;
+    position: relative;
+  }
+
+	.fighter__health-bar {
+    display: block;
 		width: 100%;
-		padding: 5px;
-		background: rgba(0, 0, 0, 1);
-		text-align: center;
-		margin-top: auto;
+		height: 100%;
+		background: #398354;
+    position: absolute;
+    left: 0;
+    top: 0;
 	}
+
+  .fighter__health-text {
+    z-index: 10;
+    position: relative;
+  }
 
 	.fight {
 		width: 50%;
+    height: 100%;
 		padding: 0 10px;
 		box-sizing: border-box;
 	}
 
 	.fight__actions {
-		height: 50%;
+		height: 60%;
 		display: flex;
 		flex-flow: row wrap;
 	}
@@ -258,13 +278,16 @@ export default {
 		flex-flow: row wrap;
 		padding: 10px;
 		box-sizing: border-box;
+    align-content: flex-start;
 	}
 
 	.fight__btn {
-		width: 25%;
+		width: 50%;
 		border: none;
 		cursor: pointer;
 		color: #fff;
+    padding: 10px 5px;
+    box-sizing: border-box;
 	}
 
 	.fight__btn_attack {
@@ -296,19 +319,11 @@ export default {
 	}
 
 	.fight__hit-btn {
-		background: #d92424;
-		padding: 5px 30px;
-		border: none;
-		color: #fff;
 		font-size: 18px;
-		cursor: pointer;
-	}
-	.fight__hit-btn:hover {
-		opacity: 0.9;
 	}
 
 	.fight__log {
-		height: 50%;
+		height: 40%;
 		overflow-x: auto;
 		background: #202020;
     border: 1px solid #ccc;
@@ -319,11 +334,15 @@ export default {
 
 	/*********************************** Responsive styles */
 
-	@media screen and (max-width: 767px), (max-height: 640px) {
+	@media screen and (max-width: 1023px) {
     .fight-section .container,
     .top-page-block,
     .bottom-page-block {
       height: auto;
+    }
+
+    .fight__btn {
+      width: 50%;
     }
   }
 </style>
