@@ -34,6 +34,15 @@ export default {
 						msg: `Поле ${fields[key].label} не должно быть короче ${fields[key].min} символов!`
 					});
 				}
+
+				if (fields[key].spaces && fields[key].value.includes(' ')) {
+					checkField(key);
+
+					errors[key].push({
+						type: 'spaces',
+						msg: `Пробелы в ${fields[key].label} запрещены!`
+					});
+				}
 			}
 
 			return {

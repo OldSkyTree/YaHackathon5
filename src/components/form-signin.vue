@@ -15,7 +15,12 @@
         class="input__element"
       >
       <span class="entry-form__errors">
-        {{ $validateErrorsMsgFrom(errors.login) }}
+        <p
+          v-for="(error, index) in $validateErrorsMsgFrom(errors.login)"
+          :key="index"
+        >
+          {{ error }}
+        </p>
       </span>
     </label>
     <label class="input">
@@ -26,7 +31,12 @@
         class="input__element"
       >
       <span class="entry-form__errors">
-        {{ $validateErrorsMsgFrom(errors.password) }}
+        <p
+          v-for="(error, index) in $validateErrorsMsgFrom(errors.password)"
+          :key="index"
+        >
+          {{ error }}
+        </p>
       </span>
     </label>
     <div class="buttons-holder">
@@ -60,7 +70,7 @@ export default {
 					label: 'Логин',
 					value: '',
 					required: true,
-					min: 5
+					min: 3
 				},
 				password: {
 					name: 'password',
@@ -94,6 +104,14 @@ export default {
 							this.$router.push({ path: '/profile' });
 						}
 						else {
+							this.errors = {
+								login: [
+									{
+										type: 'server',
+										msg: res.message
+									}
+								]
+							};
 							// eslint-disable-next-line no-console
 							console.error('Error');
 						}
