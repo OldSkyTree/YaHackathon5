@@ -1,6 +1,7 @@
 const axios = require('axios');
 
-const BASE_URL = 'https://combats-api-ya.herokuapp.com';
+// const BASE_URL = 'https://combats-api-ya.herokuapp.com';
+const BASE_URL = 'http://localhost:3333';
 
 module.exports = {
 	sendMessage : function(token, message, timestamp) {

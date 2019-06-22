@@ -3,19 +3,22 @@ const chat = require('./chat');
 const combat = require('./combat');
 const axios = require('axios');
 
-const BASE_URL = 'https://combats-api-ya.herokuapp.com';
+// const BASE_URL = 'https://combats-api-ya.herokuapp.com';
+const BASE_URL = 'http://localhost:3333';
 
 module.exports = function(app) {
 	app.post('/register', function(req, res) {
 		const {username, password} = req.body;
 
-		returnOriginData(users.registerUser(username, password), res);
+		users.updateLocalDB(users.registerUser(username, password), res);
+		// returnOriginData(users.registerUser(username, password), res);
 	});
 
 	app.post('/login', function (req, res) {
 		const {username, password} = req.body;
 
-		returnOriginData(users.loginUser(username, password), res);
+		users.updateLocalDB(users.loginUser(username, password), res);
+		// returnOriginData(users.loginUser(username, password), res);
 	});
     
 	app.get('/ping', function (req, res) {
@@ -113,7 +116,12 @@ module.exports = function(app) {
 	app.get('/status', function (req, res) {
 		let { token, combat_id } = req.query;
 
-		returnOriginData(combat.getCombatInfo(token, combat_id), res);
+		combat.processCombatResponse(combat.getCombatInfo(token, combat_id), res);
+	});
+
+	app.get('/top-player', function (req, res) {
+		const { token } = req.query;
+		res.send(users.usersRating(token));
 	});
 };
 

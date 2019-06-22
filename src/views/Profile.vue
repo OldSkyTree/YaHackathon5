@@ -73,7 +73,7 @@ export default {
 				.then(res => {
 					
 					if(res.status === 'ok') {
-						setInterval(() => {
+						let intervalId = setInterval(() => {
 							fetch(`http://localhost:3000/status?token=${this.user.token}&combat_id=${res.combat.id}`, {
 								method: 'GET'
 							})
@@ -86,6 +86,7 @@ export default {
 										this.isPending = true;
 									}
 									else if(res.status === 'ok' && res.combat.status === 'progress') {
+										clearInterval(intervalId);
 										this.$router.push({
 											name: 'battle',
 											params: { combat: res.combat }
